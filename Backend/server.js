@@ -54,10 +54,14 @@ app.post('/api/games', async (req, res) => {
   res.status(201).json({ message: "Game added!", game: newGame });
 });
 
-// Update an existing game
-app.put('/api/game/:id', async (req, res) => {
-  const game = await gameModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  res.send(game);
+// Get a single game by ID
+app.get('/api/game/:id', async (req, res) => {
+  try {
+    const game = await gameModel.findById(req.params.id);
+    res.json(game);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // Delete a game

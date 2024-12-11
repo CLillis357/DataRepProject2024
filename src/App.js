@@ -8,6 +8,7 @@ import AddGame from './components/AddGame';//Importing the add game page
 import Read from './components/Browse';
 import EditGame from './components/EditGame';
 
+
 // Define the App component
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/create" element={<AddGame />} />
         <Route path="/read" element={<Read />} />
         <Route path="/edit/:id" element={<EditGame />} />
+
       </Routes>
       {/* Footer displayed on all pages */}
       <Footer />
