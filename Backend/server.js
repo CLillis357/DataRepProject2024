@@ -34,19 +34,26 @@ const gameSchema = new mongoose.Schema({
 // Create a Mongoose model for games
 const gameModel = mongoose.model('games', gameSchema);
 
-// Get all games
+// Get all games to display on browse page(READ)
 app.get('/api/games', async (req, res) => {
   const games = await gameModel.find({});
   res.status(200).json({ games });
 });
 
-// Get a specific game by ID
+//get by ID for pre - filling edit form with current game details
 app.get('/api/game/:id', async (req, res) => {
-  const game = await gameModel.findById(req.params.id);
-  res.json(game);
+  try {
+    const game = await gameModel.findById(req.params.id);
+    if (!game) {
+      return res.status(404).json({ message: "Game not found" });
+    }
+    res.json(game);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
-// Add a new game
+// Add a new game (CREATE)
 app.post('/api/games', async (req, res) => {
   const { title, genre, price, releaseDate, imageUrl } = req.body;
   const newGame = new gameModel({ title, genre, price, releaseDate, imageUrl });
@@ -54,7 +61,7 @@ app.post('/api/games', async (req, res) => {
   res.status(201).json({ message: "Game added!", game: newGame });
 });
 
-// Update an existing game
+//Update existing game after fetching by ID (UPDATE)
 app.put('/api/game/:id', async (req, res) => {
   try {
     const updatedGame = await gameModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -67,7 +74,7 @@ app.put('/api/game/:id', async (req, res) => {
   }
 });
 
-// Delete a game
+// Delete a game after fetching by ID (DELETE)
 app.delete('/api/game/:id', async (req, res) => {
   await gameModel.findByIdAndDelete(req.params.id);
   res.json({ message: "Game deleted successfully" });

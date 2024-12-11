@@ -1,13 +1,68 @@
-/* Add custom styles for the application */
+/* Global Styles */
 body {
-    background-color: #f8f9fa; /* Light background color */
-  }
-  
-  h1, h3 {
-    color: #343a40; /* Dark gray text for headings */
-  }
-  
-  footer {
-    font-size: 0.9rem; /* Smaller font size for footer */
-  }
-  
+  background-color: #000000; 
+  font-family: 'Roboto', sans-serif;
+  color: #343a40; 
+}
+
+/* Customize Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff; 
+  font-weight: 600;
+}
+
+/* Buttons */
+.btn-edit {
+  background-color: #007bff; 
+  border-color: #007bff;
+}
+
+.btn-edit:hover {
+  background-color: #0056b3; 
+  border-color: #0056b3;
+}
+
+.btn-delete {
+  background-color: #dc3545; 
+  border-color: #dc3545;
+}
+
+.btn-delete:hover {
+  background-color: #a71d2a;
+  border-color: #a71d2a;
+}
+
+/* Cards */
+.card {
+  border-radius: 15px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px); 
+}
+
+/* Form Styling */
+.form-control {
+  border-radius: 10px; 
+  border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+  border-color: #007bff; 
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Navbar */
+.navbar {
+  background-color: #10b043; 
+}
+
+.navbar-brand, .nav-link {
+  color: #ffffff;
+}
+
+.nav-link:hover {
+  color: #f8f9fa; 
+}

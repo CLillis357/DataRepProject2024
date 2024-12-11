@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 const NavigationBar = () => {
   return (
     // Create a responsive navigation bar
-    <Navbar bg="primary" variant="dark" expand="lg">
+    <Navbar  expand="lg" variant="dark" className="bg-success">
       <Container>
         {/* Brand/logo of the site */}
         <Navbar.Brand href="/">Game Library</Navbar.Brand>

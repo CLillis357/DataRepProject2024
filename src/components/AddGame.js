@@ -15,6 +15,7 @@ const AddGame = () => {
     const game = { title, genre, price, releaseDate, imageUrl };
     console.log(game);
 
+    //Adding a new game
     axios.post('http://localhost:4000/api/games', game)
       .then((res) => { 
         console.log(res.data); 
@@ -32,6 +33,7 @@ const AddGame = () => {
       });
   };
 
+  //form handling
   return (
     <div className="container my-5">
       <h3 className="text-center mb-4">Add a New Game</h3>

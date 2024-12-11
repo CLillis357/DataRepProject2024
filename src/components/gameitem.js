@@ -19,8 +19,8 @@ const GameItem = ({ mygame, onDelete }) => {
           <strong>Release Date:</strong> {mygame.releaseDate}
         </Card.Text>
         <div className="d-flex justify-content-between">
-          <Link to={`/edit/${mygame._id}`} className="btn btn-primary">Edit</Link>
-          <button className="btn btn-danger" onClick={() => onDelete(mygame._id)}>Delete</button>
+          <Link to={`/edit/${mygame._id}`} className="btn btn-edit">Edit</Link>
+          <button className="btn btn-delete" onClick={() => onDelete(mygame._id)}>Delete</button>
         </div>
       </Card.Body>
     </Card>

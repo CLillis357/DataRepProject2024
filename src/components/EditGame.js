@@ -3,21 +3,23 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 const EditGame = () => {
-  const { id } = useParams(); // Extract the ID from the URL
-  const navigate = useNavigate(); // Redirect after form submission
+  const { id } = useParams(); // Extract game ID from URL
+  const navigate = useNavigate(); // Redirect after successful update
 
-  // State variables for the game's data
+  // State for game details
   const [title, setTitle] = useState('');
   const [genre, setGenre] = useState('');
   const [price, setPrice] = useState('');
   const [releaseDate, setReleaseDate] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
-  // Fetch game details on component mount
+  // Fetch game details on component load
   useEffect(() => {
-    axios.get(`http://localhost:4000/api/game/${id}`)
+    // Backend route for fetching game by ID
+    axios.get(`http://localhost:4000/api/game/${id}`) 
       .then((response) => {
         const game = response.data;
+        // Populate the form fields with the fetched game data
         setTitle(game.title);
         setGenre(game.genre);
         setPrice(game.price);
@@ -26,21 +28,25 @@ const EditGame = () => {
       })
       .catch((error) => {
         console.error("Error fetching game data:", error);
+        alert("Failed to load game data.");
       });
   }, [id]);
 
-  // Handle form submission
+  // Handle form submission for updating the game
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const updatedGame = { title, genre, price, releaseDate, imageUrl };
-    axios.put(`http://localhost:4000/api/game/${id}`, updatedGame)
+    // Backend route for updating the game
+    axios.put(`http://localhost:4000/api/game/${id}`, updatedGame) 
       .then(() => {
         alert("Game updated successfully!");
-        navigate("/read"); // Redirect to the Browse page
+        // Redirect to the Browse page
+        navigate("/read"); 
       })
       .catch((error) => {
         console.error("Error updating game:", error);
+        alert("Failed to update game.");
       });
   };
 
@@ -53,7 +59,7 @@ const EditGame = () => {
           <input
             type="text"
             className="form-control"
-            value={title}
+            value={title} // Pre-filled with the current game 
             onChange={(e) => setTitle(e.target.value)}
             required
           />
@@ -63,7 +69,7 @@ const EditGame = () => {
           <input
             type="text"
             className="form-control"
-            value={genre}
+            value={genre} 
             onChange={(e) => setGenre(e.target.value)}
             required
           />
@@ -73,7 +79,7 @@ const EditGame = () => {
           <input
             type="number"
             className="form-control"
-            value={price}
+            value={price} 
             onChange={(e) => setPrice(e.target.value)}
             required
           />
@@ -83,7 +89,7 @@ const EditGame = () => {
           <input
             type="date"
             className="form-control"
-            value={releaseDate}
+            value={releaseDate} 
             onChange={(e) => setReleaseDate(e.target.value)}
             required
           />
@@ -93,7 +99,7 @@ const EditGame = () => {
           <input
             type="text"
             className="form-control"
-            value={imageUrl}
+            value={imageUrl} 
             onChange={(e) => setImageUrl(e.target.value)}
             required
           />

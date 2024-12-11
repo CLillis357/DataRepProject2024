@@ -25,7 +25,7 @@ const Content = () => {
   return (
     <div className="container mt-5">
       {/* Header for the page */}
-      <h1 className="text-center mb-4">Welcome to Game Library</h1>
+      <h1 className="text-center mb-4">Welcome to Game Storage</h1>
       <Carousel>
         {/* Loop through adverts and render each one in the carousel */}
         {adverts.map((advert, index) => (
