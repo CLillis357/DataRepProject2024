@@ -1,7 +1,6 @@
 // Import necessary modules
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css'; // styling
 import App from './App'; // Main app component
 
 // Create the React DOM root
