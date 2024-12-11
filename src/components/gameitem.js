@@ -12,24 +12,15 @@ const GameItem = ({ mygame, onDelete }) => {
       />
       <Card.Body>
         <Card.Title>{mygame.title}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{mygame.genre}</Card.Subtitle>
+        <Card.Subtitle className="mb-2">{mygame.genre}</Card.Subtitle>
         <Card.Text>
-          <strong>Price:</strong> ${mygame.price} <br />
+          <strong>Price:</strong> ${mygame.price}
+          <br />
           <strong>Release Date:</strong> {mygame.releaseDate}
         </Card.Text>
         <div className="d-flex justify-content-between">
-          <Link to={`/edit/${mygame._id}`} className="btn btn-primary">
-            Edit
-          </Link>
-          <button
-            className="btn btn-danger"
-            onClick={() => {
-              console.log("Deleting game with ID:", mygame._id);
-              onDelete(mygame._id); // Call onDelete with the correct ID
-            }}
-          >
-            Delete
-          </button>
+          <Link to={`/edit/${mygame._id}`} className="btn btn-primary">Edit</Link>
+          <button className="btn btn-danger" onClick={() => onDelete(mygame._id)}>Delete</button>
         </div>
       </Card.Body>
     </Card>

@@ -54,13 +54,16 @@ app.post('/api/games', async (req, res) => {
   res.status(201).json({ message: "Game added!", game: newGame });
 });
 
-// Get a single game by ID
-app.get('/api/game/:id', async (req, res) => {
+// Update an existing game
+app.put('/api/game/:id', async (req, res) => {
   try {
-    const game = await gameModel.findById(req.params.id);
-    res.json(game);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    const updatedGame = await gameModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updatedGame) {
+      return res.status(404).json({ message: "Game not found" });
+    }
+    res.json(updatedGame);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 

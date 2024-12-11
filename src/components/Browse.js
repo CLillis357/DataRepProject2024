@@ -10,7 +10,8 @@ const Browse = () => {
     axios.get('http://localhost:4000/api/games')
       .then((response) => {
         console.log(response.data);
-        setGames(response.data.games); // Ensure backend response structure matches this
+        // Ensure backend response structure matches this
+        setGames(response.data.games); 
       })
       .catch((error) => {
         console.error("Error fetching games:", error);
@@ -21,7 +22,8 @@ const Browse = () => {
   const handleDelete = (id) => {
     axios.delete(`http://localhost:4000/api/game/${id}`)
       .then(() => {
-        setGames(games.filter((game) => game._id !== id)); // Remove the deleted game from the state
+        // Remove the deleted game from the state
+        setGames(games.filter((game) => game._id !== id)); 
       })
       .catch((error) => {
         console.error("Error deleting game:", error);
@@ -30,7 +32,8 @@ const Browse = () => {
 
   return (
     <div className="container my-5">
-      <h3 className="text-center mb-4">Available Games</h3>
+      <h3 className="text-center mb-4">Games List</h3>
+
       {/* Game cards grid */}
       <div className="row">
         {games.length > 0 ? (
