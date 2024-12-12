@@ -1,4 +1,4 @@
-import GameItem from "./gameitem";
+import GameItem from "./GameItem";
 
 const Games = ({ myGames, onDelete }) => {
   return (

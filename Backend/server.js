@@ -28,15 +28,16 @@ const gameSchema = new mongoose.Schema({
   genre: String,
   price: Number,
   releaseDate: String,
-  imageUrl: String
+  imageUrl: String,
+  rating: { type: Number, default: 0 } 
 });
 
 // Create a Mongoose model for games
 const gameModel = mongoose.model('games', gameSchema);
 
-// Get all games to display on browse page(READ)
+// Get all games to display on browse page ranked by rating(READ)
 app.get('/api/games', async (req, res) => {
-  const games = await gameModel.find({});
+  const games = await gameModel.find({}).sort({ rating: -1 }); 
   res.status(200).json({ games });
 });
 
@@ -73,6 +74,26 @@ app.put('/api/game/:id', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Update the rating of a game
+app.put('/api/game/rating/:id', async (req, res) => {
+  const { rating } = req.body;
+  try {
+    const updatedGame = await gameModel.findByIdAndUpdate(
+      req.params.id,
+      { rating },
+      { new: true } // Return the updated document
+    );
+    if (!updatedGame) {
+      return res.status(404).json({ message: "Game not found" });
+    }
+    res.json(updatedGame);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 
 // Delete a game after fetching by ID (DELETE)
 app.delete('/api/game/:id', async (req, res) => {
